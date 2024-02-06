@@ -3,10 +3,15 @@ import { useLocation } from "react-router-dom";
 import { PieChart } from "react-minimal-pie-chart";
 import { Answer } from "../types/types";
 import { Card, CardContent, CardHeader } from "@mui/material";
+import ListComponent from "../components/List";
 
 const SummaryPage: React.FC = () => {
   const location = useLocation();
   const answers = location?.state as Answer[];
+
+  if (!answers) {
+    return <div>Nothing to show...</div>;
+  }
 
   // Assuming the "question" property represents the option index
   const data = answers.map((answer, index) => ({
@@ -16,8 +21,11 @@ const SummaryPage: React.FC = () => {
   }));
 
   return (
-    <Card sx={{ width: "600px", p: 3 }}>
-      <CardHeader title="Answers Summary" />
+    <Card sx={{ p: 3 }}>
+      <CardHeader
+        title="Answers Summary"
+        subheader={<ListComponent answers={answers} />}
+      />
       <CardContent>
         <PieChart data={data} />
       </CardContent>

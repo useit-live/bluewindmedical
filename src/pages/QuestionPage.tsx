@@ -7,11 +7,12 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CircularProgress,
   List,
   ListItem,
   ListItemButton,
+  Typography,
 } from "@mui/material";
+import Loader from "../components/Loader";
 
 const QuestionPage: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -53,30 +54,37 @@ const QuestionPage: React.FC = () => {
     }
   };
 
-  if (questions.length === 0)
-    return (
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress />
-      </Box>
-    );
+  if (questions.length === 0) return <Loader />;
 
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <Card sx={{ width: "600px" }}>
-      <CardHeader title={currentQuestion.question} />
-      <CardContent>
-        <List>
-          {currentQuestion.options.map((option, index) => (
-            <ListItem key={index}>
-              <ListItemButton onClick={() => handleOptionSelect(index)}>
-                {`${index + 1}: ${option}`}
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <Typography variant="h4" gutterBottom>
+        American questionnaire
+      </Typography>
+      <Card sx={{ p: 3 }}>
+        <CardHeader title={currentQuestion.question} />
+        <CardContent>
+          <List>
+            {currentQuestion.options.map((option, index) => (
+              <ListItem key={index}>
+                <ListItemButton onClick={() => handleOptionSelect(index)}>
+                  {`${index + 1}: ${option}`}
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 
