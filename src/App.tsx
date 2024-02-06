@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import QuestionPage from "./pages/QuestionPage";
+import SummaryPage from "./pages/SummaryPage";
+import { Box, Container, Typography } from "@mui/material";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          p: 1,
+          m: 1,
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          American questionnaire
+        </Typography>
+        <Router>
+          <Routes>
+            <Route path="/summary" element={<SummaryPage />} />
+            <Route path="/" element={<QuestionPage />} />
+          </Routes>
+        </Router>
+      </Box>
+    </Container>
   );
 }
 
