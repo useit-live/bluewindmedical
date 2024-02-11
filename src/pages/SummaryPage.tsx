@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { PieChart } from "react-minimal-pie-chart";
 import { Answer } from "../types/types";
 import { Card, CardContent, CardHeader } from "@mui/material";
-import ListComponent from "../components/List";
+// import ListComponent from "../components/List";
 
 const SummaryPage: React.FC = () => {
   const location = useLocation();
@@ -23,7 +23,7 @@ const SummaryPage: React.FC = () => {
     <Card sx={{ p: 3 }}>
       <CardHeader
         title="Answers Summary"
-        subheader={<ListComponent answers={answers} />}
+        // subheader={<ListComponent answers={answers} />}
       />
       <CardContent>
         <PieChart
