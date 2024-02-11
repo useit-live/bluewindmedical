@@ -12,10 +12,9 @@ const SummaryPage: React.FC = () => {
   if (!answers) {
     return <div>Nothing to show...</div>;
   }
-
   // Assuming the "question" property represents the option index
   const data = answers.map((answer, index) => ({
-    title: `Option ${answer.question + 1}: ${answer.count} times`,
+    title: `Question ${answer.question + 1}`,
     value: answer.count,
     color: ["#E38627", "#C13C37", "#6A2135", "#A0D2DB"][answer.question],
   }));
@@ -27,7 +26,12 @@ const SummaryPage: React.FC = () => {
         subheader={<ListComponent answers={answers} />}
       />
       <CardContent>
-        <PieChart data={data} />
+        <PieChart
+          data={data}
+          animate
+          labelStyle={{ fontSize: "5px" }}
+          label={({ dataEntry }) => `${dataEntry.title}: ${dataEntry.value}`}
+        />
       </CardContent>
     </Card>
   );

@@ -20,6 +20,8 @@ const QuestionPage: React.FC = () => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const navigate = useNavigate();
 
+  const currentQuestion = questions[currentQuestionIndex];
+
   useEffect(() => {
     fetchQuestionnaire().then((data) => {
       setQuestions(data);
@@ -27,6 +29,7 @@ const QuestionPage: React.FC = () => {
   }, []);
 
   const handleOptionSelect = (optionIndex: number) => {
+    // Create a new array to avoid mutating the state directly.
     const updatedAnswers = [...answers];
     // Check if the option already exists in the array
     const existingAnswerIndex = updatedAnswers.findIndex(
@@ -55,8 +58,6 @@ const QuestionPage: React.FC = () => {
   };
 
   if (questions.length === 0) return <Loader />;
-
-  const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <Box
